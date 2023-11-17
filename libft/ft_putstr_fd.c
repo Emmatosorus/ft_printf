@@ -1,16 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 14:08:43 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/17 14:14:53 by epolitze         ###   ########.fr       */
+/*   Created: 2023/11/13 15:29:36 by epolitze          #+#    #+#             */
+/*   Updated: 2023/11/16 15:27:20 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_printf(const char *str, ...)
+#include "libft.h"
+
+void	ft_putstr_fd(char *s, int fd)
 {
-	
+	write(fd, s, ft_strlen(s));
+	return ;
 }

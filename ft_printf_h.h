@@ -6,12 +6,14 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:10:13 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/17 14:11:12 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/17 14:19:01 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
+# include "libft/libft.h"
+# include <stdarg.h>
 
 #endif
