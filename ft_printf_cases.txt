@@ -1,0 +1,32 @@
+if %c :
+	print char
+
+if %s :
+	ptrint *str
+
+if %p :
+	print &var
+
+if %d or %i :
+	alone :
+		print int
+	l :
+		print long
+	ll :
+		print long long
+	z or Z :
+		print size_t or ssize_t
+
+if %u :
+	unsigned decimal
+
+if %x :
+	print number in hexadecimal lowercase
+
+if %X :
+	print number in hexadecimal uppercase
+
+if %% :
+	print %
+
+
