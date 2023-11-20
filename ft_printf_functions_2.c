@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_h.h                                      :+:      :+:    :+:   */
+/*   ft_printf_functions_2.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 14:10:13 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/20 16:48:16 by epolitze         ###   ########.fr       */
+/*   Created: 2023/11/20 16:45:37 by epolitze          #+#    #+#             */
+/*   Updated: 2023/11/20 16:47:26 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf_h.h"
 
-# include <stdarg.h>
-# include <stddef.h>
+size_t	ft_strlen(char *str)
+{
+	size_t	i;
 
-int	ft_printf(const char *str, ...);
-int	ft_charcmp(char c, char	*str);
-size_t	ft_strlen(char *str);
-
-#endif
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
+}
