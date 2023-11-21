@@ -6,7 +6,7 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:01:28 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/20 17:00:01 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/21 09:51:21 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	ft_putvoid(void *ptr)
 	ft_putstr(ptr);
 }
 
-ft_putnbr(long long n)
+void	ft_putnbr(long long n)
 {
 	char	c;
 	long	nb;
@@ -46,7 +46,7 @@ ft_putnbr(long long n)
 	return ;
 }
 
-ft_putunbr(unsigned long long n)
+void	ft_putunbr(unsigned long long n)
 {
 	char				c;
 	unsigned long long	nb;
