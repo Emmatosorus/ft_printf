@@ -29,4 +29,6 @@ if %X :
 if %% :
 	print %
 
-
+//////////////////////////////////////////////////
+if you give NULL or 0 to printf it returns -1
+if you give 'test %\0' prints but returns -1

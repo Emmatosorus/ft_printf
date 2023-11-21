@@ -6,7 +6,7 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 16:45:37 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/21 10:11:34 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/21 11:48:15 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,29 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-char	*ft_puthex(int nb, int lower)
+int	ft_puthex(long long nb, int lower, int wcount)
 {
-	// ???
+	char	*lhexbase;
+	char	*uhexbase;
+
+	lhexbase = "0123456789abcdef";
+	uhexbase = "0123456789ABCDEF";
+	if (nb < 0)
+	{
+		wcount += ft_putchar('-');
+		nb *= -1;
+	}
+	if (nb < 16)
+	{
+		if (lower == 1)
+			wcount += ft_putchar(lhexbase[nb]);
+		else
+			wcount += ft_putchar(uhexbase[nb]);
+	}
+	else
+	{
+		wcount += ft_puthex(nb / 16, lower, wcount);
+		wcount += ft_putchar(nb % 16);
+	}
+	return (wcount);
 }

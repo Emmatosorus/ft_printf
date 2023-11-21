@@ -6,56 +6,72 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:01:28 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/21 09:51:21 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/21 12:43:23 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf_h.h"
 
-int	ft_putchar(int c)
+int	ft_putchar(char c)
 {
-	write(1, &c, 1);
+	return (write(1, &c, 1));
 }
 
 int	ft_putstr(char *str)
 {
-	write(1, str, ft_strlen(str));
+	return (write(1, str, ft_strlen(str)));
 }
 
-int	ft_putvoid(void *ptr)
+int	ft_putvoid(void *ptr, int wcount)
 {
-	ft_putstr(ptr);
+	char				*hexbase;
+	unsigned long long	nb;
+
+	nb = (unsigned long long)ptr;
+	hexbase = "0123456789abcdef";
+	if (nb < 16)
+		wcount += ft_putchar(hexbase[nb]);
+	else
+	{
+		wcount += ft_putvoid((void *)(nb / 16), wcount);
+		wcount += ft_putchar(nb % 16);
+	}
+	return (wcount);
 }
 
-void	ft_putnbr(long long n)
+int	ft_putnbr(long long n)
 {
 	char	c;
+	int		wcount;
 	long	nb;
 
 	nb = n;
+	wcount = 0;
 	if (nb < 0)
 	{
-		write(1, "-", 1);
+		wcount += write(1, "-", 1);
 		nb *= -1;
 	}
 	c = nb % 10 + 48;
 	nb = nb / 10;
 	if (nb != 0)
-		ft_putnbr_fd(nb, 1);
-	write(1, &c, 1);
-	return ;
+		ft_putnbr(nb);
+	wcount += write(1, &c, 1);
+	return (wcount);
 }
 
-void	ft_putunbr(unsigned long long n)
+int	ft_putunbr(unsigned long long n)
 {
 	char				c;
+	int					wcount;
 	unsigned long long	nb;
 
 	nb = n;
+	wcount = 0;
 	c = nb % 10 + 48;
 	nb = nb / 10;
 	if (nb != 0)
-		ft_putnbr_fd(nb, 1);
-	write(1, &c, 1);
-	return ;
+		ft_putnbr(nb);
+	wcount += write(1, &c, 1);
+	return (wcount);
 }
