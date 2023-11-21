@@ -6,11 +6,11 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 16:45:37 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/21 11:48:15 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:15:28 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_h.h"
+#include "ft_printf.h"
 
 size_t	ft_strlen(char *str)
 {

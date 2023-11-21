@@ -6,11 +6,11 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:08:43 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/21 12:43:40 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/21 13:43:39 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf_h.h"
+#include "ft_printf.h"
 
 int	ft_charcmp(char c, char	*str)
 {
@@ -40,7 +40,7 @@ int	argument_manager(char c, va_list *arg, int wcount)
 	else if (c == 'p')
 	{
 		wcount += ft_putstr("0x");
-		wcount += ft_putvoid(va_arg(*arg, void *), wcount);
+		wcount += ft_putaddress(va_arg(*arg, void *), wcount);
 	}
 	else if (c == 'd' || c == 'i')
 		wcount += ft_putnbr(va_arg(*arg, long long));
@@ -82,10 +82,13 @@ int	ft_printf(const char *str, ...)
 	return (wcount);
 }
 
-// int	main(void)
-// {
-// 	char *str = "hello";
+int	main(void)
+{
+	char *str = "hello";
+	void*ptr;
+	ptr = &str;
 
-// 	ft_printf("%s", str);
-// 	ft_printf("\n");
-// }
+	ft_printf("Ma string est : %s\nStyler nn?\nEt voici sont address : %p", str, ptr);
+	printf("\n\n");
+	printf("Ma string est : %s\nStyler nn?\nEt voici sont address : %p", str, ptr);
+}
