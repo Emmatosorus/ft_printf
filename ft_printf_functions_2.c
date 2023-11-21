@@ -6,7 +6,7 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 16:45:37 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/21 13:15:28 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/21 18:21:00 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ int	ft_puthex(long long nb, int lower, int wcount)
 	}
 	else
 	{
-		wcount += ft_puthex(nb / 16, lower, wcount);
-		wcount += ft_putchar(nb % 16);
+		wcount = ft_puthex(nb / 16, lower, wcount);
+		wcount = ft_puthex(nb % 16, lower, wcount);
 	}
 	return (wcount);
 }

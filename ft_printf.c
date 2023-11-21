@@ -6,7 +6,7 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:08:43 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/21 17:54:47 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/21 18:20:05 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,25 @@ int	ft_charcmp(char c, char	*str)
 
 int	argument_manager(char c, va_list *arg, int wcount)
 {
+	int	temp;
+
 	if (c == 'c')
-		return (ft_putchar(va_arg(*arg, int)));
+		wcount += ft_putchar(va_arg(*arg, int));
 	else if (c == 's')
-		return (ft_putstr(va_arg(*arg, char *)));
+		wcount += ft_putstr(va_arg(*arg, char *));
 	else if (c == 'p')
 	{
-		wcount += ft_putstr("0x");
-		wcount += ft_putaddress(va_arg(*arg, void *), wcount);
+		temp = ft_putstr("0x");
+		wcount += temp + ft_putaddress(va_arg(*arg, void *), wcount);
 	}
 	else if (c == 'd' || c == 'i')
-		return (ft_putnbr(va_arg(*arg, long long)));
+		wcount = ft_putnbr(va_arg(*arg, long long), wcount);
 	else if (c == 'u')
-		return (ft_putunbr(va_arg(*arg, unsigned long long)));
+		wcount = ft_putunbr(va_arg(*arg, unsigned long long), wcount);
 	else if (c == 'x' || c == 'X')
-		return (ft_puthex(va_arg(*arg, unsigned long long), c != 'X', wcount));
+		wcount = ft_puthex(va_arg(*arg, unsigned long long), c != 'X', wcount);
 	else
-		return (ft_putchar('%'));
-	// printf("\nwcount = %d\n", wcount);
+		wcount += ft_putchar('%');
 	return (wcount);
 }
 
