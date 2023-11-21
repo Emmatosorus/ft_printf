@@ -6,7 +6,7 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:10:13 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/21 13:43:31 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/21 15:34:17 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,13 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stddef.h>
-
-#include <stdio.h> // SUPPRIME CETTE LIGNE !!!!!!!!!!!!!!!!!!!!
+# include <stdio.h> // SUPPRIME CETTE LIGNE !!!!!!!!!!!!!!!!!!!!
 
 int		ft_printf(const char *str, ...);
 int		ft_charcmp(char c, char	*str);
 int		ft_putchar(char c);
 int		ft_putstr(char *str);
-int     ft_putaddress(void *ptr, int wcount);
+int		ft_putaddress(void *ptr, int wcount);
 int		ft_putnbr(long long n);
 int		ft_putunbr(unsigned long long n);
 size_t	ft_strlen(char *str);

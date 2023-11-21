@@ -6,6 +6,7 @@ NAME = libftprintf.a
 
 SRC = \
 	ft_printf.c \
+	ft_putaddress.c \
 	ft_printf_functions.c \
 	ft_printf_functions_2.c
 

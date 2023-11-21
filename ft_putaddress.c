@@ -1,39 +1,30 @@
-#include "ft_printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putaddress.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/21 15:32:32 by epolitze          #+#    #+#             */
+/*   Updated: 2023/11/21 16:35:45 by epolitze         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-char	hex_digit(int v)
-{
-	if (v >= 0 && v < 10)
-		return ('0' + v);
-	else
-		return ('a' + v - 10);
-}
+#include "ft_printf.h"
 
 int	ft_putaddress(void *ptr, int wcount)
 {
-	long 			i;
-	unsigned long	nptr;
-
-	nptr = (unsigned long)ptr;
-	i = (sizeof(nptr) << 3) - (2 << 3) - 4;
-	while (i >= 0)
+	char				*hexbase;
+	unsigned long long	nb;
+	
+	nb = (unsigned long long)ptr;
+	hexbase = "0123456789abcdef";
+	if (nb < 16)
+		wcount += ft_putchar(hexbase[nb]);
+	else
 	{
-		wcount += ft_putchar(hex_digit((nptr >> i) & 0xf));
-		i -= 4;
+		wcount += ft_putaddress((void *)(nb / 16), wcount);
+		wcount += ft_putaddress((void *)(nb % 16), wcount);
 	}
 	return (wcount);
 }
-
-// char				*hexbase;
-// unsigned long long	nb;
-
-// nb = (unsigned long long)ptr;
-// hexbase = "0123456789abcdef";
-// if (nb < 16)
-// 	wcount += ft_putchar(hexbase[nb]);
-// else
-// {
-// 	wcount += ft_putvoid((void *)(nb / 16), wcount);
-// 	wcount += ft_putchar(nb % 16);
-// }
-// printf("\nwcount = %d\n", wcount);
-// return (wcount);

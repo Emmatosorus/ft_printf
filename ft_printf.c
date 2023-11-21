@@ -6,7 +6,7 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:08:43 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/21 13:43:39 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/21 16:08:14 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,23 @@ int	ft_charcmp(char c, char	*str)
 int	argument_manager(char c, va_list *arg, int wcount)
 {
 	if (c == 'c')
-		wcount += ft_putchar(va_arg(*arg, int));
+		return(ft_putchar(va_arg(*arg, int)));
 	else if (c == 's')
-		wcount += ft_putstr(va_arg(*arg, char *));
+		return(ft_putstr(va_arg(*arg, char *)));
 	else if (c == 'p')
 	{
 		wcount += ft_putstr("0x");
 		wcount += ft_putaddress(va_arg(*arg, void *), wcount);
 	}
 	else if (c == 'd' || c == 'i')
-		wcount += ft_putnbr(va_arg(*arg, long long));
+		return(ft_putnbr(va_arg(*arg, long long)));
 	else if (c == 'u')
-		wcount += ft_putunbr(va_arg(*arg, unsigned long long));
+		return(ft_putunbr(va_arg(*arg, unsigned long long)));
 	else if (c == 'x' || c == 'X')
-		wcount += ft_puthex(va_arg(*arg, unsigned long long), c != 'X', wcount);
+		return(ft_puthex(va_arg(*arg, unsigned long long), c != 'X', wcount));
 	else
-		wcount += ft_putchar('%');
-	return (wcount);
+		return(ft_putchar('%'));
+	return (0);
 }
 
 int	ft_printf(const char *str, ...)
@@ -60,10 +60,12 @@ int	ft_printf(const char *str, ...)
 	int		temp;
 	va_list	arg;
 
-	i = 0;
+	i = -1;
 	wcount = 0;
 	va_start(arg, str);
-	while (str[i])
+	if (!str)
+		return (-1);
+	while (str[++i] != 0)
 	{
 		if (str[i] == '%' && ft_charcmp(str[i + 1], "cspdiuxX%") == 1)
 		{
@@ -76,19 +78,7 @@ int	ft_printf(const char *str, ...)
 		else
 			if (!write(1, &str[i], 1))
 				return (-1);
-		i++;
 	}
 	va_end(arg);
 	return (wcount);
-}
-
-int	main(void)
-{
-	char *str = "hello";
-	void*ptr;
-	ptr = &str;
-
-	ft_printf("Ma string est : %s\nStyler nn?\nEt voici sont address : %p", str, ptr);
-	printf("\n\n");
-	printf("Ma string est : %s\nStyler nn?\nEt voici sont address : %p", str, ptr);
 }
