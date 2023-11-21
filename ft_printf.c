@@ -6,7 +6,7 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:08:43 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/21 16:08:14 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:54:47 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,23 +34,24 @@ int	ft_charcmp(char c, char	*str)
 int	argument_manager(char c, va_list *arg, int wcount)
 {
 	if (c == 'c')
-		return(ft_putchar(va_arg(*arg, int)));
+		return (ft_putchar(va_arg(*arg, int)));
 	else if (c == 's')
-		return(ft_putstr(va_arg(*arg, char *)));
+		return (ft_putstr(va_arg(*arg, char *)));
 	else if (c == 'p')
 	{
 		wcount += ft_putstr("0x");
 		wcount += ft_putaddress(va_arg(*arg, void *), wcount);
 	}
 	else if (c == 'd' || c == 'i')
-		return(ft_putnbr(va_arg(*arg, long long)));
+		return (ft_putnbr(va_arg(*arg, long long)));
 	else if (c == 'u')
-		return(ft_putunbr(va_arg(*arg, unsigned long long)));
+		return (ft_putunbr(va_arg(*arg, unsigned long long)));
 	else if (c == 'x' || c == 'X')
-		return(ft_puthex(va_arg(*arg, unsigned long long), c != 'X', wcount));
+		return (ft_puthex(va_arg(*arg, unsigned long long), c != 'X', wcount));
 	else
-		return(ft_putchar('%'));
-	return (0);
+		return (ft_putchar('%'));
+	// printf("\nwcount = %d\n", wcount);
+	return (wcount);
 }
 
 int	ft_printf(const char *str, ...)
@@ -70,14 +71,17 @@ int	ft_printf(const char *str, ...)
 		if (str[i] == '%' && ft_charcmp(str[i + 1], "cspdiuxX%") == 1)
 		{
 			temp = wcount;
-			wcount += argument_manager(str[i + 1], &arg, wcount);
-			if (temp == wcount + 1)
+			wcount = argument_manager(str[i + 1], &arg, wcount);
+			if (temp - 1 == wcount)
 				return (-1);
 			i++;
 		}
 		else
+		{
 			if (!write(1, &str[i], 1))
 				return (-1);
+			wcount++;
+		}
 	}
 	va_end(arg);
 	return (wcount);

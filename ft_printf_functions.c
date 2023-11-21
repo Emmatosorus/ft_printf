@@ -6,7 +6,7 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:01:28 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/21 15:45:35 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/21 17:32:18 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_putchar(char c)
 
 int	ft_putstr(char *str)
 {
-	if(str)
+	if (str)
 		return (write(1, str, ft_strlen(str)));
 	return (0);
 }
