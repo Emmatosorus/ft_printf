@@ -6,7 +6,7 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:08:43 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/22 10:16:14 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/22 14:15:04 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,20 @@ int	ft_charcmp(char c, char	*str)
 	return (0);
 }
 
+int	null_check(void *ptr, int wcount)
+{
+	int	temp;
+
+	if (ptr)
+	{
+		temp = ft_putstr("0x");
+		wcount += temp + ft_putaddress(ptr, wcount);
+	}
+	else
+		wcount += ft_putstr("(nil)");
+	return (wcount);
+}
+
 int	argument_manager(char c, va_list *arg, int wcount)
 {
 	int	temp;
@@ -41,8 +55,7 @@ int	argument_manager(char c, va_list *arg, int wcount)
 		wcount += ft_putstr(va_arg(*arg, char *));
 	else if (c == 'p')
 	{
-		temp = ft_putstr("0x");
-		wcount += temp + ft_putaddress(va_arg(*arg, void *), wcount);
+		wcount = null_check(va_arg(*arg, void *), wcount);
 	}
 	else if (c == 'd' || c == 'i')
 		wcount = ft_putnbr(va_arg(*arg, int), wcount);
@@ -55,11 +68,21 @@ int	argument_manager(char c, va_list *arg, int wcount)
 	return (wcount);
 }
 
+int	ft_printf_2(int i, int wcount, const char *str, va_list *arg)
+{
+	int	temp;
+
+	temp = wcount;
+	wcount = argument_manager(str[i + 1], arg, wcount);
+	if (temp - 1 == wcount)
+		return (-1);
+	return (wcount);
+}
+
 int	ft_printf(const char *str, ...)
 {
 	int		i;
 	int		wcount;
-	int		temp;
 	va_list	arg;
 
 	i = -1;
@@ -71,10 +94,7 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%' && ft_charcmp(str[i + 1], "cspdiuxX%") == 1)
 		{
-			temp = wcount;
-			wcount = argument_manager(str[i + 1], &arg, wcount);
-			if (temp - 1 == wcount)
-				return (-1);
+			wcount = ft_printf_2(i, wcount, str, &arg);
 			i++;
 		}
 		else
