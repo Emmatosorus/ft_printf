@@ -6,7 +6,7 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:01:28 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/22 14:32:02 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/22 18:14:25 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,36 @@ int	ft_putchar(char c)
 
 int	ft_putstr(char *str)
 {
+	int	temp;
+
 	if (str)
-		return (write(1, str, ft_strlen(str)));
-	return (write(1, "(null)", 6));
+		temp = write(1, str, ft_strlen(str));
+	else
+		temp = write(1, "(null)", 6);
+	return (temp);
 }
 
 int	ft_putnbr(long long n, int wcount)
 {
-	char	c;
+	int temp;
+	int temp2;
 
+	temp = 0;
 	if (n < 0)
 	{
-		wcount += write(1, "-", 1);
+		temp = ft_putchar('-');
 		n *= -1;
 	}
-	c = n % 10 + '0';
-	n = n / 10;
-	if (n != 0)
+	if (n > 9)
 	{
-		wcount = ft_putnbr(n, wcount);
-		if (wcount == -1)
-			return (-1);
+		wcount = ft_putnbr(n / 10, wcount);
+		temp2 = ft_putchar(n % 10 + '0');
 	}
-	if (write(1, &c, 1))
-		wcount++;
 	else
+		temp2 = ft_putchar(n % 10 + '0');
+	if (temp == -1 || temp2 == -1)
 		return (-1);
+	wcount += (temp + temp2);
 	return (wcount);
 }
 
