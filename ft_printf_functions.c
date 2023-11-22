@@ -6,7 +6,7 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:01:28 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/22 14:06:48 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/22 14:32:02 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,15 @@ int	ft_putnbr(long long n, int wcount)
 	c = n % 10 + '0';
 	n = n / 10;
 	if (n != 0)
+	{
 		wcount = ft_putnbr(n, wcount);
-	wcount += write(1, &c, 1);
+		if (wcount == -1)
+			return (-1);
+	}
+	if (write(1, &c, 1))
+		wcount++;
+	else
+		return (-1);
 	return (wcount);
 }
 
@@ -50,7 +57,14 @@ int	ft_putunbr(unsigned long long n, int wcount)
 	c = nb % 10 + 48;
 	nb = nb / 10;
 	if (nb != 0)
+	{
 		wcount = ft_putunbr(nb, wcount);
-	wcount += write(1, &c, 1);
+		if (wcount == -1)
+			return (-1);
+	}
+	if (write(1, &c, 1))
+		wcount++;
+	else
+		return (-1);
 	return (wcount);
 }
