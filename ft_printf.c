@@ -6,7 +6,7 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:08:43 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/23 10:04:39 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:32:09 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	ft_charcmp(char c, char	*str)
 	int	i;
 
 	if (!c)
-		return (-1);
+		return (1);
 	else
 	{
 		i = 0;
@@ -62,8 +62,10 @@ static int	argument_manager(char c, va_list *arg)
 		wcount = ft_putunbr(va_arg(*arg, unsigned long long), wcount);
 	else if (c == 'x' || c == 'X')
 		wcount = ft_puthex(va_arg(*arg, unsigned long long), c != 'X', wcount);
-	else
+	else if (c == '%')
 		wcount = ft_putchar('%');
+	else
+		wcount = -1;
 	return (wcount);
 }
 
@@ -76,6 +78,8 @@ int	ft_printf(const char *str, ...)
 
 	i = -1;
 	wcount = 0;
+	if (!str)
+		return (-1);
 	va_start(arg, str);
 	while (str && str[++i])
 	{
@@ -83,14 +87,12 @@ int	ft_printf(const char *str, ...)
 			temp = argument_manager(str[++i], &arg);
 		else
 			temp = ft_putchar(str[i]);
-		//printf("\ntemp = %d\n", temp);
 		if (temp == -1)
 		{
 			va_end(arg);
 			return (-1);
 		}
 		wcount += temp;
-		//printf("\nwcount = %d\n", wcount);
 	}
 	va_end(arg);
 	return (wcount);

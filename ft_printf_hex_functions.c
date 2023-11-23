@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_functions_2.c                            :+:      :+:    :+:   */
+/*   ft_printf_hex_functions.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 16:45:37 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/23 10:07:18 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:34:30 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ size_t	ft_strlen(char *str)
 
 int	ft_puthex(long long nb, int lower, int wcount)
 {
-	int 	temp;
+	int		temp;
 	char	*hexbase;
 
 	if (lower == 1)
