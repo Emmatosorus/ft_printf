@@ -6,7 +6,7 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 15:01:28 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/23 10:34:05 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:50:37 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,16 @@ int	ft_putnbr(long long n, int wcount)
 	if (n < 0)
 	{
 		temp = ft_putchar('-');
+		if (temp == -1)
+			return (-1);
 		n *= -1;
 	}
 	if (n > 9)
 	{
 		wcount = ft_putnbr(n / 10, wcount);
 		temp2 = ft_putchar(n % 10 + '0');
+		if (temp2 == -1)
+			return (-1);
 	}
 	else
 		temp2 = ft_putchar(n % 10 + '0');
@@ -52,23 +56,21 @@ int	ft_putnbr(long long n, int wcount)
 	return (wcount);
 }
 
-int	ft_putunbr(unsigned long long n, int wcount)
+int	ft_putunbr(unsigned long int n, int wcount)
 {
-	char				c;
-	unsigned long long	nb;
+	int	temp;
 
-	nb = n;
-	c = nb % 10 + 48;
-	nb = nb / 10;
-	if (nb != 0)
+	if (n > 9)
 	{
-		wcount = ft_putunbr(nb, wcount);
-		if (wcount == -1)
+		wcount = ft_putnbr(n / 10, wcount);
+		temp = ft_putchar(n % 10 + '0');
+		if (temp == -1)
 			return (-1);
 	}
-	if (write(1, &c, 1))
-		wcount++;
 	else
+		temp = ft_putchar(n % 10 + '0');
+	if (temp == -1)
 		return (-1);
+	wcount += temp;
 	return (wcount);
 }

@@ -6,7 +6,7 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:08:43 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/23 13:10:09 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:51:27 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static int	argument_manager(char c, va_list *arg)
 	else if (c == 'd' || c == 'i')
 		wcount = ft_putnbr(va_arg(*arg, int), wcount);
 	else if (c == 'u')
-		wcount = ft_putunbr(va_arg(*arg, unsigned long long), wcount);
+		wcount = ft_putunbr(va_arg(*arg, unsigned int), wcount);
 	else if (c == 'x' || c == 'X')
-		wcount = ft_puthex(va_arg(*arg, unsigned long long), c != 'X', wcount);
+		wcount = ft_puthex(va_arg(*arg, unsigned int), c != 'X', wcount);
 	else if (c == '%')
 		wcount = ft_putchar('%');
 	else
@@ -52,10 +52,10 @@ static int	argument_manager(char c, va_list *arg)
 
 int	ft_printf(const char *str, ...)
 {
-	int		i;
-	int		wcount;
-	int		temp;
-	va_list	arg;
+	size_t		i;
+	int			wcount;
+	int			temp;
+	va_list		arg;
 
 	i = -1;
 	wcount = 0;

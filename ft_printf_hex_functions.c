@@ -6,7 +6,7 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/20 16:45:37 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/23 10:34:30 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:38:49 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	ft_strlen(char *str)
 	return (i);
 }
 
-int	ft_puthex(long long nb, int lower, int wcount)
+int	ft_puthex(unsigned long int nb, int lower, int wcount)
 {
 	int		temp;
 	char	*hexbase;
@@ -35,6 +35,8 @@ int	ft_puthex(long long nb, int lower, int wcount)
 	{
 		wcount = ft_puthex(nb / 16, lower, wcount);
 		temp = ft_putchar(hexbase[nb % 16]);
+		if (temp == -1)
+			return (-1);
 	}
 	else
 		temp = ft_putchar(hexbase[nb % 16]);
