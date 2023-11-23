@@ -6,7 +6,7 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:10:13 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/22 16:00:52 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:04:15 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 # include <stdio.h> // SUPPRIME CETTE LIGNE !!!!!!!!!!!!!!!!!!!!
 
 int		ft_printf(const char *str, ...);
-int		ft_charcmp(char c, char	*str);
 int		ft_putchar(char c);
 int		ft_putstr(char *str);
 int		ft_putaddress(void *ptr, int wcount);

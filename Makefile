@@ -1,24 +1,23 @@
 CC = cc
 
-CFLAGS = -Werror -Wextra -Wall
+CFLAGS = -Werror -Wextra -Wall -MMD -MP
 
 NAME = libftprintf.a
 
 SRC = \
 	ft_printf.c \
-	ft_putaddress.c \
 	ft_printf_functions.c \
-	ft_printf_functions_2.c
+	ft_printf_hex_functions.c
 
 OBJ = $(SRC:.c=.o)
-OBJ_D = $(OBJ:.o=.d)
+OBJ_D = ${OBJ:.o=.d}
 
 # ####### Rules
 
 all : $(NAME)
 
 .c.o:
-	$(CC) $(FLAGS) -c $< -o $(<:.c=.o)
+	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
 -include $(OBJ_D)
 

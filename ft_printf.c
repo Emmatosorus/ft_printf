@@ -6,13 +6,13 @@
 /*   By: epolitze <epolitze@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/17 14:08:43 by epolitze          #+#    #+#             */
-/*   Updated: 2023/11/22 18:21:18 by epolitze         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:04:39 by epolitze         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_charcmp(char c, char	*str)
+static int	ft_charcmp(char c, char	*str)
 {
 	int	i;
 
@@ -31,7 +31,7 @@ int	ft_charcmp(char c, char	*str)
 	return (0);
 }
 
-int	null_check(void *ptr, int wcount)
+static int	null_check(void *ptr, int wcount)
 {
 	int	temp;
 
@@ -45,7 +45,7 @@ int	null_check(void *ptr, int wcount)
 	return (wcount);
 }
 
-int	argument_manager(char c, va_list *arg)
+static int	argument_manager(char c, va_list *arg)
 {
 	int	wcount;
 
